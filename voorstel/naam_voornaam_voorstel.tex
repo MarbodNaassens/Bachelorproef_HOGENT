@@ -1,0 +1,100 @@
+%==============================================================================
+% Sjabloon onderzoeksvoorstel bachelorproef
+%==============================================================================
+% Gebaseerd op LaTeX-sjabloon ‘Stylish Article’ (zie voorstel.cls)
+% Auteur: Jens Buysse, Bert Van Vreckem
+%
+% Compileren in TeXstudio:
+%
+% - Zorg dat Biber de bibliografie compileert (en niet Biblatex)
+%   Options > Configure > Build > Default Bibliography Tool: "txs:///biber"
+% - F5 om te compileren en het resultaat te bekijken.
+% - Als de bibliografie niet zichtbaar is, probeer dan F5 - F8 - F5
+%   Met F8 compileer je de bibliografie apart.
+%
+% Als je JabRef gebruikt voor het bijhouden van de bibliografie, zorg dan
+% dat je in ``biblatex''-modus opslaat: File > Switch to BibLaTeX mode.
+
+\documentclass{voorstel}
+
+\usepackage{lipsum}
+\usepackage{float}
+
+%------------------------------------------------------------------------------
+% Metadata over het voorstel
+%------------------------------------------------------------------------------
+
+%---------- Titel & auteur ----------------------------------------------------
+
+% TODO: geef werktitel van je eigen voorstel op
+\PaperTitle{Geautomatiseerd parsen van systeem logs}
+\PaperType{Onderzoeksvoorstel Bachelorproef 2020-2021} % Type document
+
+% TODO: vul je eigen naam in als auteur, geef ook je emailadres mee!
+\Authors{Marbod Naassens\textsuperscript{1}} % Authors
+\CoPromotor{Geert De Paep\textsuperscript{2} (Exitas)}
+\affiliation{\textbf{Contact:}
+  \textsuperscript{1} \href{mailto:marbod.naassens@student.hogent.be}{marbod.naassens@student.hogent.be};
+  \textsuperscript{2} \href{mailto:Geert.DePaep@exitas.be}{Geert.DePaep@exitas.be};
+}
+
+%---------- Abstract ----------------------------------------------------------
+
+\Abstract{
+    Binnen deze bachelorproef wordt er dieper ingegaan op één van de processen binnen anomaliedetectie van systeem en applicatie logfiles. Logfiles zijn bestanden die de continuïteit van een systeem of applicatie weergeven. Door deze te observeren, kunnen fouten binnen het systeem of de applicatie naar boven komen. De anomaliedetectie van deze files helpt ons om sneller fouten te detecteren en op te lossen. Deze bachelorproef zal binnen anomaliedetectie kijken naar de verschillende parsing methodes voor deze logfiles. Parsingmethodes zijn methodes om een bestand te organiseren en leesbaarder te maken. De logfiles op zich zijn niet zeer leesbaar of analyseerbaar, maar door deze parsingmethodes worden de logfiles meer gestructureerd, aldus makkelijker om te analyseren, waardoor anomaliedetectie mogelijk wordt. Om specifieker te zijn zal dit onderzoek vooral kijken naar verschillende reeds bestaande log parsingmethodes (automatisch en niet-automatisch) en deze zullen worden vergeleken om te achterhalen wat de best-practices methodes en parsing technologieën zijn.
+    Experimenten zullen uitgevoerd worden om de hypothese vanuit de paper `Tools and Benchmarks for Automated Log Parsing` te onderzoeken. Verder zullen we experimenteren met parsers die niet zijn opgenomen in de reeds vernoemde paper. In dit werk zal omschreven worden welke parsingmethodes geprefereerd worden in een real-time setting en waar men moet op letten bij het parsen van systeem logs. Er zal ook vermeld worden welke technologieën er beschikbaar zijn voor log parsing en welke binnen deze technologieën de laagste foutenmarge en de laagste tijdscomplexiteit zullen bevatten. 
+    Van deze bachelorproef wordt verwacht dat deze voor volgend onderzoek, of voor opbouwend onderzoek binnen anomaliedetectie van logfiles, een informatiebron kan zijn voor het belang van log parsing en de verschillende onderdelen binnen log parsing. Ook wordt er verwacht dat deze bachelorproef een duidelijk antwoord zal geven op de vraag wat de beste parsingmethode is binnen systeem logs in een real-time setting. De assumptie is dat, zoals in de bovenvernoemde paper, `Drain` als beste en meest efficiënte parsingtool naar boven zal komen.
+    Dit werk is zeer actueel, want elke dag komen we in contact met verschillende applicaties en systemen. Dit betekent dat naar de toekomst toe er een exponentiële stijging zal zijn in het aantal logfiles. Van dit werk wordt vooral verwacht dat het een duidelijke leidraad zal zijn voor de keuze van parsingmethodes binnen anomaliedetectie, i.e. een duidelijke weergave van welke parsingmethode men het best gebruikt en verder wordt verwacht dat het een basis zal vormen voor verder onderzoek naar parsingmethodes en de ontwikkeling van nieuwe technologieën.
+}
+
+%---------- Onderzoeksdomein en sleutelwoorden --------------------------------
+% TODO: Sleutelwoorden:
+%
+% Het eerste sleutelwoord beschrijft het onderzoeksdomein. Je kan kiezen uit
+% deze lijst:
+%
+% - Mobiele applicatieontwikkeling
+% - Webapplicatieontwikkeling
+% - Applicatieontwikkeling (andere)
+% - Systeembeheer
+% - Netwerkbeheer
+% - Mainframe
+% - E-business
+% - Databanken en big data
+% - Machineleertechnieken en kunstmatige intelligentie
+% - Andere (specifieer)
+%
+% De andere sleutelwoorden zijn vrij te kiezen
+
+\Keywords{Machineleertechnieken. Logs --- Parsing --- Anomaliedetectie --- Python} % Keywords
+\newcommand{\keywordname}{Sleutelwoorden} % Defines the keywords heading name
+
+%---------- Titel, inhoud -----------------------------------------------------
+\usepackage{biblatex} 
+
+\begin{document}
+\flushbottom % Makes all text pages the same height
+\maketitle % Print the title and abstract box
+\tableofcontents % Print the contents section
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%------------------------------------------------------------------------------
+% Hoofdtekst
+%------------------------------------------------------------------------------
+
+% De hoofdtekst van het voorstel zit in een apart bestand, zodat het makkelijk
+% kan opgenomen worden in de bijlagen van de bachelorproef zelf.
+\input{voorstel-inhoud}
+
+%------------------------------------------------------------------------------
+% Referentielijst
+%------------------------------------------------------------------------------
+% TODO: de gerefereerde werken moeten in BibTeX-bestand ``voorstel.bib''
+% voorkomen. Gebruik JabRef om je bibliografie bij te houden en vergeet niet
+% om compatibiliteit met Biber/BibLaTeX aan te zetten (File > Switch to
+% BibLaTeX mode)
+
+\phantomsection
+\printbibliography[heading=bibintoc]
+
+\end{document}

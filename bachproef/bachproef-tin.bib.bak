@@ -25,4 +25,216 @@
   year = {2009}
 }
 
+@Article{Doll1954,
+  author       = {Doll, Richard and Hill, A Bradford},
+  date         = {1954},
+  journaltitle = {British Medical Journal},
+  title        = {The mortality of doctors in relation to their smoking habits: a preliminary report},
+  number       = {7455},
+  pages        = {1529-1533},
+  volume       = {328},
+  owner        = {jbuy519},
+  timestamp    = {2014.03.28},
+}
+
+@Book{Moore2002,
+  author    = {Moore, David and McCabe, George},
+  date      = {2002},
+  title     = {Introduction to the Practice of Statistics},
+  publisher = {W. H. Freeman},
+  owner     = {jbuy519},
+  timestamp = {2014.01.28},
+}
+
+@Book{Smits2011,
+  author    = {Smits, Johan and Edens, Ronald},
+  date      = {2011},
+  title     = {Onderzoek met SPSS en Excel},
+  publisher = {Pearson Education},
+  owner     = {jbuy519},
+  timestamp = {2014.01.23},
+}
+
+@InProceedings{TBA2019,
+  author    = {J. {Zhu} and S. {He} and J. {Liu} and P. {He} and Q. {Xie} and Z. {Zheng} and M. R. {Lyu}},
+  booktitle = {2019 IEEE/ACM 41st International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP)},
+  date      = {2019},
+  title     = {Tools and Benchmarks for Automated Log Parsing},
+  doi       = {10.1109/ICSE-SEIP.2019.00021},
+  pages     = {121-130},
+  abstract  = {Logs are imperative in the development and maintenance process of many software systems. They record detailed runtime information that allows developers and support engineers to monitor their systems and dissect anomalous behaviors and errors. The increasing scale and complexity of modern software systems, however, make the volume of logs explodes. In many cases, the traditional way of manual log inspection becomes impractical. Many recent studies, as well as industrial tools, resort to powerful text search and machine learning-based analytics solutions. Due to the unstructured nature of logs, a first crucial step is to parse log messages into structured data for subsequent analysis. In recent years, automated log parsing has been widely studied in both academia and industry, producing a series of log parsers by different techniques. To better understand the characteristics of these log parsers, in this paper, we present a comprehensive evaluation study on automated log parsing and further release the tools and benchmarks for easy reuse. More specifically, we evaluate 13 log parsers on a total of 16 log datasets spanning distributed systems, supercomputers, operating systems, mobile systems, server applications, and standalone software. We report the benchmarking results in terms of accuracy, robustness, and efficiency, which are of practical importance when deploying automated log parsing in production. We also share the success stories and lessons learned in an industrial application at Huawei. We believe that our work could serve as the basis and provide valuable guidance to future research and deployment of automated log parsing.},
+  keywords  = {data mining;software maintenance;system monitoring;logs explodes;manual log inspection;log messages;automated log parsing;software systems;log datasets;Huawei;software development;software maintenance;Tools;Software as a service;Benchmark testing;Software systems;Task analysis;Anomaly detection;Computer science;log management;log parsing;log analysis;anomaly detection;AIOps},
+}
+
+@InProceedings{LogLens2018,
+  author    = {B. {Debnath} and M. {Solaimani} and M. A. G. {Gulzar} and N. {Arora} and C. {Lumezanu} and J. {Xu} and B. {Zong} and H. {Zhang} and G. {Jiang} and L. {Khan}},
+  booktitle = {2018 IEEE 38th International Conference on Distributed Computing Systems (ICDCS)},
+  date      = {2018},
+  title     = {LogLens: A Real-Time Log Analysis System},
+  doi       = {10.1109/ICDCS.2018.00105},
+  pages     = {1052-1062},
+}
+
+@InProceedings{LogParse2020,
+  author    = {W. {Meng} and Y. {Liu} and F. {Zaiter} and S. {Zhang} and Y. {Chen} and Y. {Zhang} and Y. {Zhu} and E. {Wang} and R. {Zhang} and S. {Tao} and D. {Yang} and R. {Zhou} and D. {Pei}},
+  booktitle = {2020 29th International Conference on Computer Communications and Networks (ICCCN)},
+  date      = {2020},
+  title     = {LogParse: Making Log Parsing Adaptive through Word Classification},
+  doi       = {10.1109/ICCCN49398.2020.9209681},
+  pages     = {1-9},
+}
+
+@Misc{SSLP2020,
+  author      = {Sasho Nedelkoski and Jasmin Bogatinovski and Alexander Acker and Jorge Cardoso and Odej Kao},
+  date        = {2020-03-17},
+  title       = {Self-Supervised Log Parsing},
+  eprint      = {2003.07905},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+}
+
+@InProceedings{he2017drain,
+  author       = {He, Pinjia and Zhu, Jieming and Zheng, Zibin and Lyu, Michael R},
+  booktitle    = {2017 IEEE International Conference on Web Services (ICWS)},
+  date         = {2017},
+  title        = {Drain: An online log parsing approach with fixed depth tree},
+  organization = {IEEE},
+  pages        = {33--40},
+}
+
+@InProceedings{du2016spell,
+  author       = {Du, Min and Li, Feifei},
+  booktitle    = {2016 IEEE 16th International Conference on Data Mining (ICDM)},
+  date         = {2016},
+  title        = {Spell: Streaming parsing of system event logs},
+  organization = {IEEE},
+  pages        = {859--864},
+}
+
+@Article{shima2016length,
+  author       = {Shima, Keiichi},
+  date         = {2016},
+  journaltitle = {arXiv preprint arXiv:1611.03213},
+  title        = {Length matters: Clustering system log messages using length of words},
+}
+
+@InProceedings{messaoudi2018search,
+  author       = {Messaoudi, Salma and Panichella, Annibale and Bianculli, Domenico and Briand, Lionel and Sasnauskas, Raimondas},
+  booktitle    = {2018 IEEE/ACM 26th International Conference on Program Comprehension (ICPC)},
+  date         = {2018},
+  title        = {A search-based approach for accurate identification of log message formats},
+  organization = {IEEE},
+  pages        = {167--16710},
+}
+
+@InProceedings{makanju2009clustering,
+  author    = {Makanju, Adetokunbo AO and Zincir-Heywood, A Nur and Milios, Evangelos E},
+  booktitle = {Proceedings of the 15th ACM SIGKDD international conference on Knowledge discovery and data mining},
+  date      = {2009},
+  title     = {Clustering event logs using iterative partitioning},
+  pages     = {1255--1264},
+}
+
+@InProceedings{jiang2008abstracting,
+  author       = {Jiang, Zhen Ming and Hassan, Ahmed E and Flora, Parminder and Hamann, Gilbert},
+  booktitle    = {2008 The Eighth International Conference on Quality Software},
+  date         = {2008},
+  title        = {Abstracting execution logs to execution events for enterprise applications (short paper)},
+  organization = {IEEE},
+  pages        = {181--186},
+}
+
+@Article{chandola2009anomaly,
+  author       = {Chandola, Varun and Banerjee, Arindam and Kumar, Vipin},
+  date         = {2009},
+  journaltitle = {ACM computing surveys (CSUR)},
+  title        = {Anomaly detection: A survey},
+  number       = {3},
+  pages        = {1--58},
+  volume       = {41},
+  publisher    = {ACM New York, NY, USA},
+}
+
+@Article{jiang2008automated,
+  author       = {Jiang, Zhen Ming and Hassan, Ahmed E and Hamann, Gilbert and Flora, Parminder},
+  date         = {2008},
+  journaltitle = {Journal of Software Maintenance and Evolution: Research and Practice},
+  title        = {An automated approach for abstracting execution logs to execution events},
+  number       = {4},
+  pages        = {249--267},
+  volume       = {20},
+  publisher    = {Wiley Online Library},
+}
+
+@Article{5936060,
+  author       = {A. {Makanju} and A. N. {Zincir-Heywood} and E. E. {Milios}},
+  date         = {2012},
+  journaltitle = {IEEE Transactions on Knowledge and Data Engineering},
+  title        = {A Lightweight Algorithm for Message Type Extraction in System Application Logs},
+  doi          = {10.1109/TKDE.2011.138},
+  number       = {11},
+  pages        = {1921-1936},
+  volume       = {24},
+}
+
+@InProceedings{nagappan2010abstracting,
+  author       = {Nagappan, Meiyappan and Vouk, Mladen A},
+  booktitle    = {2010 7th IEEE Working Conference on Mining Software Repositories (MSR 2010)},
+  title        = {Abstracting log lines to log event types for mining software system logs},
+  organization = {IEEE},
+  pages        = {114--117},
+  date         = {2010},
+}
+
+@InProceedings{fu2009execution,
+  author       = {Fu, Qiang and Lou, Jian-Guang and Wang, Yi and Li, Jiang},
+  booktitle    = {2009 ninth IEEE international conference on data mining},
+  title        = {Execution anomaly detection in distributed systems through unstructured log analysis},
+  organization = {IEEE},
+  pages        = {149--158},
+  date         = {2009},
+}
+
+@InProceedings{vaarandi2015logcluster,
+  author       = {Vaarandi, Risto and Pihelgas, Mauno},
+  booktitle    = {2015 11th International conference on network and service management (CNSM)},
+  title        = {Logcluster-a data clustering and pattern mining algorithm for event logs},
+  organization = {IEEE},
+  pages        = {1--7},
+  date         = {2015},
+}
+
+@InProceedings{hamooni2016logmine,
+  author    = {Hamooni, Hossein and Debnath, Biplob and Xu, Jianwu and Zhang, Hui and Jiang, Guofei and Mueen, Abdullah},
+  booktitle = {Proceedings of the 25th ACM International on Conference on Information and Knowledge Management},
+  date      = {2016},
+  title     = {Logmine: Fast pattern recognition for log analytics},
+  pages     = {1573--1582},
+}
+
+@InProceedings{tang2011logsig,
+  author    = {Tang, Liang and Li, Tao and Perng, Chang-Shing},
+  booktitle = {Proceedings of the 20th ACM international conference on Information and knowledge management},
+  date      = {2011},
+  title     = {LogSig: Generating system events from raw textual logs},
+  pages     = {785--794},
+}
+
+@InProceedings{vaarandi2003data,
+  author       = {Vaarandi, Risto},
+  booktitle    = {Proceedings of the 3rd IEEE Workshop on IP Operations \& Management (IPOM 2003)(IEEE Cat. No. 03EX764)},
+  date         = {2003},
+  title        = {A data clustering algorithm for mining patterns from event logs},
+  organization = {Ieee},
+  pages        = {119--126},
+}
+
+@Article{dai2020logram,
+  author       = {Dai, Hetong and Li, Heng and Chen, Che Shao and Shang, Weiyi and Chen, Tse-Hsun},
+  date         = {2020},
+  journaltitle = {IEEE Transactions on Software Engineering},
+  title        = {Logram: Efficient log parsing using n-gram dictionaries},
+  publisher    = {IEEE},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}

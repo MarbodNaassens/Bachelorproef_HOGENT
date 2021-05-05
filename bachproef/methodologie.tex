@@ -11,5 +11,37 @@
 %% mogelijke manier toegepast hebt om een antwoord te vinden op de
 %% onderzoeksvraag.
 
-\lipsum[21-25]
+In dit hoofdstuk gaan we dieper in op het onderzoek van deze bachelorproef. De verschillende parsers die binnen dit onderzoek worden gebruikt zijn reeds toegelicht in de Stand van Zaken. Dit hoofdstuk gaat hun implementatie verder toelichten in de context van deze bachelorproef. Het hoofdstuk is ingedeeld in verschillende secties die elk een deel van het onderzoek beschrijven. De eerste twee secties gaan dieper in op de start van het onderzoek, hoe het onderzoek is opgesteld, de basis van het onderzoek, de gekozen technologie en de verschillende testen die zullen worden uitgevoerd. Hierna volgen er verschillende secties die dieper ingaan op hoe het onderzoek is uitgevoerd en op welke manier de code is opgebouwd, aangepast, etc..
+
+
+\section{Opzetting van het onderzoek}
+Omdat dit onderzoek gebaseerd is op een reeds uitgebrachte paper is het duidelijk dat om dit onderzoek op te zetter er ten eerste moet gekeken worden naar het vorgaande onderzoek. De paper waarop deze bachelorproef gebaseerd is, `Tools and Benchmarks for Automated Log Parsing` \autocite{TBA2019}, heeft reeds een opensource repository op GitHub staan met alle code voor de parsers binnen deze paper. Hierbij zat een documentatie die uitleg gaf over hoe men de repository moest downloaden en installeren en hoe de tool gebruikt kon worden. De log parsers die niet tot deze paper behoren hebben elk een duidelijke paper waarin de algoritmes toegelicht worden alsook GitHub repositories van de makers waarin reeds een implementatie verwerkt staat. Deze parsers zullen dus op een gelijkaardige manier moeten ingewerkt worden in de Benchmark tool zodat deze op dezelfde manier getest kunnen worden en er dus een duidelijke vergelijking kan gemaakt worden.\\
+
+In de onderstaande subsecties worden twee delen van de opzetting van het onderzoek besproken. De technologie subsectie bevat de verschillende technologieën die nodig zijn om dit onderzoek uit te voeren en hoe deze moeten worden opgezet en de vergelijkingscriteria subsectie bevat een opeenlijsting van de verschillende criteria waarop er zal gelet worden tijdens de vergelijking van de verschillende log parsers.
+
+\subsection{Technologie}
+Een groot deel van de opzetting van de technologie binnen dit onderzoek wordt reeds behandeld in de documentatie van de repository van de paper `Tools and Benchmarks for Automated Log Parsing` \autocite{TBA2019}. Hieronder valt ten eerste de opzetting van Docker. In Docker is het belangrijk om de Docker image van logparser te activeren anders zal het niet mogelijk zijn om de volledige repository van de paper te benutten. De repository van de paper bevat verschillende files en folders, voor het onderzoek van deze bachelorproef zijn de folders `logparsers`, `benchmarks` en `logs` de belangrijkste. Hieronder zal een toelichting gegeven worden over de inhoud van deze folders:
+\begin{itemize}
+    \item Logparsers: Deze folder zal in het onderzoek alle implementaties van de logparsers bevatten. Deze implementaties zijn geschreven in Python omdat dit de taal is die gekozen is door de vorige paper en algemeen bekend staat als een goede taal voor data verwerking. Ook zal het makkelijker zijn om de parser `NuLog` te implementeren via Python omdat deze reeds een library bevat voor het werken met Neurale Netwerken en NLP.\\
+    \item Benchmarks: Deze folder zal in het onderzoek alle test bestanden bevatten die gebruikt worden om de log bestanden door de parser te laten verwerken en om vergelijkende waarden terug te krijgen.\\
+    \item Logs: Deze folder zal in het onderzoek alle log bestanden bevatten, i.e. tekst bestanden met daarin onverwerkte log messages.
+\end{itemize}
+
+\subsection{Vergelijkingscriteria}
+Het is niet eenvoudig om log parsers te vergelijken omdat hun werking zeer verschillend is en het niet realistisch is om elke parsing van elke lijn te gaan analyseren. Daarom moeten er duidelijke criteria worden opgesteld waarmee deze parsers zullen vergeleken worden. Op basis van deze criteria zal een antwoord op de onderzoeksvraag gezocht worden. Hieronder zal een overzicht gegeven worden van de verschillende criteria:
+\begin{itemize}
+    \item Tijd: Tijd is een factor die een grote rol zal spelen omdat er gezocht wordt naar een parser die in real-time kan werken. Dit criterium zal getest worden aan de hand van de grootte van de log files, `Hoelang duurt het om een klein aantal logs te verwerken ten opzichte van een groot aantal logs?` en aan de hand van de snelheid van een stream voor de online werking, `Is er een verschil in de tijd voor de verwerking van een stream die een groot aantal logs per seconde laat doorgaan ten opzichte van een kleiner aantal logs per seconde`.\\
+    
+    \item Manuele check: Een manuele check zal uitgevoerd worden op de eerste 20 lijnen van een log bestand om te zien of deze parsing wel zinvol is en geen random waarden doorgeeft.\\
+    
+    \item Cluster check: Er zal gekeken worden naar het aantal clusters die gegenereerd worden tijdens de parsing, `Is dit een groot/klein aantal? Is dit aantal te groot (specialisatie) of te klein (generalisatie)?`. Alsook zal er gekeken worden naar de clusters zelf of deze wel nuttig zijn en duidelijke patronen weergeven. Dit is een belangrijk gegeven om zeker te zijn dat er geen underfitting of overfitting ontstaat tijdens de parsing.\\
+    
+    \item Online vs. Offline: Er zal ook gekeken worden naar hoe online methodes omgaan met een stream van data en naar hoe makkelijk de offline methodes online kunnen gemaakt worden door bijvoorbeeld integratie met LogParse.
+\end{itemize}
+
+
+
+\section{Testen van benchmarks}
+
+\section{Toevoegen en testen van nieuwe parsers}
 

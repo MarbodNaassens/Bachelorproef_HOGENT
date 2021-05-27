@@ -9,7 +9,7 @@ import random
 import math
 import time
 import operator
-import re
+import regex as re
 import os
 import pandas as pd
 import hashlib
@@ -190,8 +190,9 @@ class LogParser:
             lineNo += 1
 
         for i in range(self.para.groupNum):
-            sig = max(candidateSeq[i].items(), key=operator.itemgetter(1))[0]
-            self.signature.append(sig)
+            if len(candidateSeq[i].items()) != 0:
+                sig = max(candidateSeq[i].items(), key=operator.itemgetter(1))[0]
+                self.signature.append(sig)
 
     def writeResultToFile(self):
         idx_eventID = {}

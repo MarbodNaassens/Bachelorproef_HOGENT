@@ -2,7 +2,7 @@
 
 import sys
 sys.path.append('../')
-from logparser import LogMine, evaluator
+from parsers import LogMine, evaluator
 import os
 import pandas as pd
 
@@ -156,7 +156,7 @@ benchmark_settings = {
 }
 
 bechmark_result = []
-for dataset, setting in benchmark_settings.iteritems():
+for dataset, setting in benchmark_settings.items():
     print('\n=== Evaluation on %s ==='%dataset)
     indir = os.path.join(input_dir, os.path.dirname(setting['log_file']))
     log_file = os.path.basename(setting['log_file'])

@@ -11,6 +11,22 @@ input_dir = '../logs/' # The input directory of log file
 output_dir = 'Drain_result/' # The output directory of parsing results
 
 benchmark_settings = {
+    'Orval': {
+        'log_file': 'Orval/alert_ORVAL.log',
+        'log_format': '<Date>T<Time> <Content>',
+        'regex': '',
+        'st': 0.5,
+        'depth': 4
+    },
+
+    'WebLog': {
+        'log_file': 'WebLog/weblog.txt',
+        'log_format': '<IP>,\[<Date>:<Time>,<Content>,<Result>',
+        'regex': '',
+        'st': 0.5,
+        'depth': 4
+    },
+
     'HDFS': {
         'log_file': 'HDFS/HDFS_2k.log',
         'log_format': '<Date> <Time> <Pid> <Level> <Component>: <Content>',

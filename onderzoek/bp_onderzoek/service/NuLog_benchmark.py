@@ -13,6 +13,77 @@ input_dir = '../logs/'  # The input directory of log file
 output_dir = './AttentionParserResult/'  # The output directory of parsing results
 
 benchmark_settings = {
+    'Orval': {
+        'log_file': 'Orval/alert_ORVAL.log',
+        'log_format': '<Date>T<Time> <Content>',
+        'filters': '([ ])',
+        'k': 15,
+        'nr_epochs': 5,
+        'num_samples': 0  
+    },
+
+    'WebLog': {
+        'log_file': 'WebLog/weblog.txt',
+        'log_format': '<IP>,\[<Date>:<Time>,<Content>,<Result>',
+        'filters': '([ ])',
+        'k': 15,
+        'nr_epochs': 5,
+        'num_samples': 0  
+    },
+
+    'Thunderbird': {
+        'log_file': 'Thunderbird/Thunderbird_2k.log',
+        'log_format': '<Label> <Timestamp> <Date> <User> <Month> <Day> <Time> <Location> <Component>(\[<PID>\])?: <Content>',
+        'filters': '([\s(\d+\.){3}\d+])',
+        'k': 15,
+        'nr_epochs': 5,
+        'num_samples': 0     
+    },
+
+    'Zookeeper': {
+        'log_file': 'Zookeeper/Zookeeper_2k.log',
+        'log_format': '<Date> <Time> - <Level>  \[<Node>:<Component>@<Id>\] - <Content>',
+        'filters': '([\s(/|)(\d+\.){3,}\d+(:\d+)?])',
+        'k': 50,
+        'nr_epochs': 3,
+        'num_samples': 0          
+    },
+
+    'Proxifier': {
+        'log_file': 'Proxifier/Proxifier_2k.log',
+        'log_format': '\[<Time>\] <Program> - <Content>',
+        'filters': '([ ])',
+        'k': 15,
+        'nr_epochs': 5,
+        'num_samples': 0 
+    },
+
+    'OpenSSH': {
+        'log_file': 'OpenSSH/OpenSSH_2k.log',
+        'log_format': '<Date> <Day> <Time> <Component> sshd\[<Pid>\]: <Content>',
+        'filters': '([ ])',
+        'k': 15,
+        'nr_epochs': 5,
+        'num_samples': 0  
+    },
+
+    'Linux': {
+        'log_file': 'Linux/Linux_2k.log',
+        'log_format': '<Month> <Date> <Time> <Level> <Component>(\[<PID>\])?: <Content>',
+        'filters': '([\s(\d+\.){3}\d+, \s\d{2}:\d{2}:\d{2}])',
+        'k': 50,
+        'nr_epochs': 3,
+        'num_samples': 0    
+    },
+
+    'Hadoop': {
+        'log_file': 'Hadoop/Hadoop_2k.log',
+        'log_format': '<Date> <Time> <Level> \[<Process>\] <Component>: <Content>', 
+        'filters': '([\s(\d+\.){3}\d+])',
+        'k': 50,
+        'nr_epochs': 3,
+        'num_samples': 0      
+    },
 
     'BGL': {
         'log_file': 'BGL/BGL_2k.log',
@@ -117,14 +188,14 @@ for m in range(10):
         parser = NuLogParser.LogParser(indir=indir, outdir=output_dir, filters=setting['filters'], k=setting['k'], log_format=setting['log_format'])
         parser.parse(log_file, nr_epochs=setting['nr_epochs'], num_samples=setting['num_samples'])
 
-        accuracy_PA, accuracy_exact_string_matching, edit_distance_result_mean, edit_distance_result_std = evaluator.evaluate(
+        f_measure, accuracy = evaluator.evaluate(
             groundtruth=os.path.join(indir, log_file + '_structured.csv'),
             parsedresult=os.path.join(output_dir, log_file + '_structured.csv')
         )
-        bechmark_result.append([dataset, accuracy_PA, accuracy_exact_string_matching, edit_distance_result_mean, edit_distance_result_std])
+        bechmark_result.append([dataset, f_measure, accuracy])
 
     print('\n=== Overall evaluation results ===')
-    df_result = pd.DataFrame(bechmark_result, columns=['Dataset', 'Accuracy_PA', 'Accuracy_ExactMatching','Edit_distance_mean', 'Edit_distance_std'])
+    df_result = pd.DataFrame(bechmark_result, columns=['Dataset', 'F_measure', 'Accuracy_ExactMatching'])
     df_result.set_index('Dataset', inplace=True)
     print(df_result)
     df_result.T.to_csv(output_dir+'NuLog_benchmark_result_run_'+str(m)+'.csv')

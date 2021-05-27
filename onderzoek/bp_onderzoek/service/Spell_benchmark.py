@@ -2,7 +2,7 @@
 
 import sys
 sys.path.append('../')
-from logparser import Spell, evaluator
+from parsers import Spell, evaluator
 import os
 import pandas as pd
 
@@ -11,6 +11,20 @@ input_dir = '../logs/'  # The input directory of log file
 output_dir = 'Spell_result/'  # The output directory of parsing results
 
 benchmark_settings = {
+    'WebLog': {
+        'log_file': 'WebLog/weblog.txt',
+        'log_format': '<IP>,\[<Date>:<Time>,<Content>,<Result>',
+        'regex': '',
+        'tau': 0.7
+    },
+
+    'Orval': {
+        'log_file': 'Orval/alert_ORVAL.log',
+        'log_format': '<Date>T<Time> <Content>',
+        'regex': '',
+        'tau': 0.7
+    },
+
     'HDFS': {
         'log_file': 'HDFS/HDFS_2k.log',
         'log_format': '<Date> <Time> <Pid> <Level> <Component>: <Content>',
@@ -125,7 +139,7 @@ benchmark_settings = {
 }
 
 bechmark_result = []
-for dataset, setting in benchmark_settings.iteritems():
+for dataset, setting in benchmark_settings.items():
     print('\n=== Evaluation on %s ==='%dataset)
     indir = os.path.join(input_dir, os.path.dirname(setting['log_file']))
     log_file = os.path.basename(setting['log_file'])

@@ -5,7 +5,7 @@ License     : MIT
 """
 
 import sys
-import re
+import regex as re
 import os
 import numpy as np
 import pandas as pd
@@ -209,7 +209,7 @@ class LogParser:
 
     def printTree(self, node, dep):
         pStr = ''   
-        for i in xrange(dep):
+        for i in range(dep):
             pStr += '\t'
 
         if node.token == '':

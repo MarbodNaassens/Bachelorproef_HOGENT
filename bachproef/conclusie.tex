@@ -14,5 +14,22 @@
 % Heeft het onderzoek geleid tot nieuwe vragen die uitnodigen tot verder 
 %onderzoek?
 
-\lipsum[76-80]
+%\lipsum[76-80]
+Na het observeren van de resultaten van onderzoek weergegeven in de sectie \ref{ch:methodologie}, kan er een duidelijk antwoord gegeven worden op de onderzoeksvraag. De onderzoeksvraag was: 'Wat is de huidige snelste log parser die een duidelijke en analyseerbare parsing oplevert voor loganomaliedetectie en die ongesuperviseerd getraind kan worden in een real-time setting?'.\\
 
+Hierbij is de conclusie dat Drain nog altijd naar boven komt als de parser die aan deze voorwaarden het best voldoet. Drain kan getraind worden ongesuperviseerd zoals getest in sectie \ref{subsection:OnlineOffline} en geeft hierna steeds goede resultaten weer. De kwaliteit van de resultaten is belangrijk voor het eerste deel van de onderzoeksvraag. Deze parser levert een duidelijk en analyseerbare parsing op die in verder onderzoek in verband met loganomaliedetectie kan gebruikt worden. Ook levert deze parser een snel resultaat, zo duurt de parsing van 2000 lijnen nooit langer dan 0.5 seconden.\\
+
+Er wordt verwacht dat Drain een meerwaarde zal vormen binnen onderzoek in verband met anomaliedetectie voor de promotor van deze bachelorproef. Verder kan deze parser ook een meerwaarde vormen voor het bedrijf Exitas. Zo kunnen de logfiles automatisch snel geparsed worden mits enkele aanpassingen. Als één loglijn alle data bevat in plaats van gebruik te maken van meerdere lijnen zal deze parser een goede parsing weergeven die kan helpen bij het analyse proces van de logbestanden. Hiernaast wordt verwacht dat dit een leidraad kan vormen naar verder onderzoek. Deze parser kan gebruikt worden in verder onderzoek naar anomaliedetectie maar ook binnen het domein van parsing kan er nog veel onderzoek gebeuren.\\
+
+Dit resultaat was onverwachts omdat deze parser toch reeds lang bestaat en er reeds nieuwe parsers ontwikkeld zijn. Zo werd er verwacht dat Logram een betere oplossing ging vormen. Deze parser was zeer performant en leverde steeds de snelste parsing op maar de accuraatheid liet van zich afweten bij enkele datasets terwijl Drain een zeer goede accuraatheid consistent aanhoudt.\\
+
+Er werd ook verwacht dat de parser NuLog een zeer goede kandidaat zou zijn en deze heeft zich zeker bewezen maar het feit dat er voor de opzet van het model zoveel tijd nodig is en het feit dat de accuraatheid zeer veel afhangt van het afstellen van een model naar een log bestand was een minpunt. Deze parser behaalde op de datasets die reeds waren inbegrepen in de repository zeer goede scores maar bij het toevoegen van nieuwe datasets zakten de scores al snel, zelfs bij kleine aanpassingen.\\
+
+Vragen die binnen dit onderzoek overblijven zijn:
+\begin{itemize}
+    \item Kan Logram aangepast worden om een betere parsing accuraatheid te leveren aan dezelfde snelheid?
+    \item Hoe kan men op een efficiënte manier online methodes testen zonder gebruik van bijvoorbeeld LogParse?
+    \item Kunnen de parsers omgevormd worden om multi-lijnen logs te parsen
+\end{itemize} 
+
+Verder onderzoek zou nog gevoerd moeten worden over het gebruik van Drain binnen anomaliedetectie. Zoals hierboven vermeld zal er ook nog onderzoek nodig zijn naar de behoudt van snelheid en parsing binnen online streamende logs. Op dit moment zijn de tools hiervoor echter zeer beperkt.

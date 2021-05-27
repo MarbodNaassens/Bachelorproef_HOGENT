@@ -1,7 +1,3 @@
-EventId,EventTemplate
-E1,jk2_init() Found child <*> in scoreboard slot <*>
-E2,workerEnv.init() ok <*>
-E3,mod_jk child workerEnv in error state <*>
-E4,[client <*>] Directory index forbidden by rule: <*>
-E5,jk2_init() Can't find child <*> in scoreboard
-E6,mod_jk child init <*> <*>
+version https://git-lfs.github.com/spec/v1
+oid sha256:64e4bf77bb87e6762e59df8ea7eef95ee4dd9be7f29702c767dff88ec951d11f
+size 287

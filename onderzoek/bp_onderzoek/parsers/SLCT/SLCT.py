@@ -8,7 +8,7 @@ sys.path.append('../')
 
 import hashlib
 import pandas as pd
-import re
+import regex as re
 from datetime import datetime
 from ..logmatch import regexmatch
 import subprocess
@@ -41,8 +41,8 @@ def SLCT(para, log_format, rex):
     # SLCT compilation
     if not os.path.isfile('../SLCT/slct'):
         try:
-            print('Compile SLCT...\n>> gcc -o ../logparser/SLCT/slct -O2 ../logparser/SLCT/cslct.c')
-            subprocess.check_output('gcc -o ../logparser/SLCT/slct -O2 ../logparser/SLCT/cslct.c', 
+            print('Compile SLCT...\n>> gcc -o ../parsers/SLCT/slct -O2 ../parsers/SLCT/cslct.c')
+            subprocess.check_output('gcc -o ../parsers/SLCT/slct -O2 ../parsers/SLCT/cslct.c', 
                 stderr=subprocess.STDOUT, shell=True)
         except:
             print("Compile error! Please check GCC installed.\n")

@@ -3,6 +3,7 @@
 import hashlib
 import os
 
+import tensorflow as tf
 import numpy as np
 import torch
 import torch.nn as nn
@@ -402,8 +403,7 @@ class SimpleLossCompute:
 
     def __call__(self, x, y, norm):
         x = self.generator(x)
-        y = y.reshape(-1)
-        y = long(y)
+        y = y.reshape(-1).long()
         loss = self.criterion(x, y)
         if not self.is_test:
             loss.backward()

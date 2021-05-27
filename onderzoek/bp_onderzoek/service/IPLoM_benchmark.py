@@ -11,6 +11,62 @@ input_dir = '../logs/'  # The input directory of log file
 output_dir = 'IPLoM_result/'  # The output directory of parsing results
 
 benchmark_settings = {
+    'Mac': {
+        'log_file': 'Mac/Mac_2k.log',
+        'log_format': '<Month>  <Date> <Time> <User> <Component>\[<PID>\]( \(<Address>\))?: <Content>',
+        'CT': 0.5,
+        'lowerBound': 0.25,
+        'regex': [r'([\w-]+\.){2,}[\w-]+']
+        },
+
+    'Andriod': {
+        'log_file': 'Andriod/Andriod_2k.log',
+        'log_format': '<Date> <Time>  <Pid>  <Tid> <Level> <Component>: <Content>',
+        'CT': 0.35,
+        'lowerBound': 0.3,
+        'regex': [r'(/[\w-]+)+', r'([\w-]+\.){2,}[\w-]+', r'\b(\-?\+?\d+)\b|\b0[Xx][a-fA-F\d]+\b|\b[a-fA-F\d]{4,}\b']
+        },
+
+    'HealthApp': {
+        'log_file': 'HealthApp/HealthApp_2k.log',
+        'log_format': '<Time>\|<Component>\|<Pid>\|<Content>',
+        'CT': 0.25,
+        'lowerBound': 0.3,
+        'regex': []
+        },
+
+    'Apache': {
+        'log_file': 'Apache/Apache_2k.log',
+        'log_format': '\[<Time>\] \[<Level>\] <Content>',
+        'CT': 0.3,
+        'lowerBound': 0.4,
+        'regex': [r'(\d+\.){3}\d+']
+        },
+
+    'Proxifier': {
+        'log_file': 'Proxifier/Proxifier_2k.log',
+        'log_format': '\[<Time>\] <Program> - <Content>',
+        'CT': 0.9,
+        'lowerBound': 0.25,
+        'regex': [r'<\d+\ssec', r'([\w-]+\.)+[\w-]+(:\d+)?', r'\d{2}:\d{2}(:\d{2})*', r'[KGTM]B'],
+        },
+
+    'OpenSSH': {
+        'log_file': 'OpenSSH/OpenSSH_2k.log',
+        'log_format': '<Date> <Day> <Time> <Component> sshd\[<Pid>\]: <Content>',
+        'CT': 0.78,
+        'lowerBound': 0.25,
+        'regex': [r'(\d+\.){3}\d+', r'([\w-]+\.){2,}[\w-]+']
+        },
+
+    'OpenStack': {
+        'log_file': 'OpenStack/OpenStack_2k.log',
+        'log_format': '<Logrecord> <Date> <Time> <Pid> <Level> <Component> \[<ADDR>\] <Content>',
+        'CT': 0.9,
+        'lowerBound': 0.25,
+        'regex': [r'((\d+\.){3}\d+,?)+', r'/.+?\s', r'\d+']
+    },
+
     'HDFS': {
         'log_file': 'HDFS/HDFS_2k.log',
         'log_format': '<Date> <Time> <Pid> <Level> <Component>: <Content>',
@@ -82,66 +138,10 @@ benchmark_settings = {
         'lowerBound': 0.3,
         'regex': [r'(\d+\.){3}\d+', r'\d{2}:\d{2}:\d{2}']
         },
-
-    'Andriod': {
-        'log_file': 'Andriod/Andriod_2k.log',
-        'log_format': '<Date> <Time>  <Pid>  <Tid> <Level> <Component>: <Content>',
-        'CT': 0.25,
-        'lowerBound': 0.3,
-        'regex': [r'(/[\w-]+)+', r'([\w-]+\.){2,}[\w-]+', r'\b(\-?\+?\d+)\b|\b0[Xx][a-fA-F\d]+\b|\b[a-fA-F\d]{4,}\b']
-        },
-
-    'HealthApp': {
-        'log_file': 'HealthApp/HealthApp_2k.log',
-        'log_format': '<Time>\|<Component>\|<Pid>\|<Content>',
-        'CT': 0.25,
-        'lowerBound': 0.3,
-        'regex': []
-        },
-
-    'Apache': {
-        'log_file': 'Apache/Apache_2k.log',
-        'log_format': '\[<Time>\] \[<Level>\] <Content>',
-        'CT': 0.3,
-        'lowerBound': 0.4,
-        'regex': [r'(\d+\.){3}\d+']
-        },
-
-    'Proxifier': {
-        'log_file': 'Proxifier/Proxifier_2k.log',
-        'log_format': '\[<Time>\] <Program> - <Content>',
-        'CT': 0.9,
-        'lowerBound': 0.25,
-        'regex': [r'<\d+\ssec', r'([\w-]+\.)+[\w-]+(:\d+)?', r'\d{2}:\d{2}(:\d{2})*', r'[KGTM]B'],
-        },
-
-    'OpenSSH': {
-        'log_file': 'OpenSSH/OpenSSH_2k.log',
-        'log_format': '<Date> <Day> <Time> <Component> sshd\[<Pid>\]: <Content>',
-        'CT': 0.78,
-        'lowerBound': 0.25,
-        'regex': [r'(\d+\.){3}\d+', r'([\w-]+\.){2,}[\w-]+']
-        },
-
-    'OpenStack': {
-        'log_file': 'OpenStack/OpenStack_2k.log',
-        'log_format': '<Logrecord> <Date> <Time> <Pid> <Level> <Component> \[<ADDR>\] <Content>',
-        'CT': 0.9,
-        'lowerBound': 0.25,
-        'regex': [r'((\d+\.){3}\d+,?)+', r'/.+?\s', r'\d+']
-    },
-
-    'Mac': {
-        'log_file': 'Mac/Mac_2k.log',
-        'log_format': '<Month>  <Date> <Time> <User> <Component>\[<PID>\]( \(<Address>\))?: <Content>',
-        'CT': 0.3,
-        'lowerBound': 0.25,
-        'regex': [r'([\w-]+\.){2,}[\w-]+']
-        }
 }
 
 bechmark_result = []
-for dataset, setting in benchmark_settings.iteritems():
+for dataset, setting in benchmark_settings.items():
     print('\n=== Evaluation on %s ==='%dataset)
     indir = os.path.join(input_dir, os.path.dirname(setting['log_file']))
     log_file = os.path.basename(setting['log_file'])

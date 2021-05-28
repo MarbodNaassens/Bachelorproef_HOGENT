@@ -9,14 +9,7 @@ Deze repository bevat de LaTeX bestanden voor het voorstel en de finale bachelor
 ## Het bachelorproef onderzoek
 
 Dit onderzoek is gevoerd op basis van de [logparser repository](https://github.com/logpai/logparser) van Logpai.
-Om deze repository te doen werken in de nieuwste versie van Python moesten de imports van regex veranderd worden van 
-```python
-import re;
-```
-naar
-```python
-import regex as re;
-```
+Om deze repository te gebruiken kan de uitleg binnen het hoofdstuk "Methodologie" van de bachelorproef gebruikt worden.
 
 
 ## Bijdragen

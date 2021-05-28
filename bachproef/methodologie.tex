@@ -11,11 +11,11 @@
 %% mogelijke manier toegepast hebt om een antwoord te vinden op de
 %% onderzoeksvraag.
 
-In dit hoofdstuk gaan we dieper in op het onderzoek van deze bachelorproef. De verschillende parsers die binnen dit onderzoek worden gebruikt zijn reeds toegelicht in de Stand van Zaken \ref{ch:stand-van-zaken}. Dit hoofdstuk gaat hun implementatie verder toelichten in de context van deze bachelorproef. De eerste twee secties gaan dieper in op de start van het onderzoek, hoe het onderzoek is opgesteld, de basis van het onderzoek, de gekozen technologie en de verschillende testen die zullen worden uitgevoerd. Hierna volgen er verschillende secties die dieper ingaan op hoe het onderzoek is uitgevoerd en op welke manier de code is opgebouwd, aangepast, etc..
+In dit hoofdstuk zal er dieper ingegaan worden op het onderzoek van deze bachelorproef. De verschillende parsers die binnen dit onderzoek worden gebruikt zijn reeds toegelicht in de Stand van Zaken \ref{ch:stand-van-zaken}. Dit hoofdstuk gaat hun implementatie verder toelichten in de context van deze bachelorproef. De eerste twee secties gaan dieper in op de start van het onderzoek, hoe het onderzoek is opgesteld, de basis van het onderzoek, de gekozen technologie en de verschillende testen die zullen worden uitgevoerd. Hierna volgen er verschillende secties die dieper ingaan op hoe het onderzoek is uitgevoerd en op welke manier de code is opgebouwd, aangepast, etc..
 
 
 \section{Opzetting van het onderzoek}
-Omdat dit onderzoek gebaseerd is op een reeds uitgebrachte paper is het duidelijk dat, om dit onderzoek op te zetten er ten eerste moet gekeken worden naar het voorgaande onderzoek. De paper waarop deze bachelorproef gebaseerd is, `Tools and Benchmarks for Automated Log Parsing` \autocite{TBA2019}, heeft reeds een opensource repository op GitHub staan met alle code voor de parsers binnen deze paper \footnote{https://github.com/logpai/logparser}. Hierbij zat een documentatie \footnote{https://logparser.readthedocs.io/} die uitleg gaf over hoe men de repository moest downloaden en installeren en hoe de tool gebruikt kon worden.\\
+Omdat dit onderzoek gebaseerd is op een reeds uitgebrachte paper is het zinvol om eerst te kijken naar het voorgaande onderzoek. De paper waarop deze bachelorproef gebaseerd is, `Tools and Benchmarks for Automated Log Parsing` \autocite{TBA2019}, heeft tezamen met een andere paper `An Evaluation Study on Log Parsing and Its Use in Log Mining` \autocite{he2016evaluation} reeds een opensource repository op GitHub staan met alle code voor de parsers binnen deze papers \footnote{https://github.com/logpai/logparser}. Hierbij zat een documentatie \footnote{https://logparser.readthedocs.io/} die uitleg gaf over hoe de repository moest gedownload en geïnstalleerd worden en hoe de tool gebruikt kon worden.\\
 
 De log parsers die niet tot deze paper behoren hebben elk een duidelijke paper waarin de algoritmes toegelicht worden alsook GitHub repositories \footnote{NuLog repository: https://github.com/nulog/nulog} \footnote{Logram repository: https://github.com/BlueLionLogram/Logram} van de makers waarin reeds een implementatie verwerkt staat. Deze parsers zullen dus op een gelijkaardige manier moeten ingewerkt worden in de Benchmark tool zodat deze op dezelfde manier getest kunnen worden en er dus een duidelijke vergelijking kan gemaakt worden.\\
 
@@ -25,16 +25,9 @@ In de onderstaande subsecties worden twee delen van de opzetting van het onderzo
 \label{section:Technologie}
 Een groot deel van de opzetting van de technologie binnen dit onderzoek wordt reeds behandeld in de documentatie van de repository van de paper `Tools and Benchmarks for Automated Log Parsing` \autocite{TBA2019} \footnote{https://logparser.readthedocs.io/}.\\
 
-Hieronder valt ten eerste de opzetting met Docker. Docker is een manier de volledige repository met alle benodigdheden te installeren op de gekozen computer. Dit wordt vooral gebruikt binnen Linux en daarom wordt er ook aangeraden om op een Linux machine te werken. Binnen dit onderzoek is er echter gewerkt met een Windows machine omdat deze parsers op elke machine zouden moeten werken en zo geeft dit onderzoek ook een weergave voor de opzet met Windows. Om Docker te gebruiken op Windows moet eerst de Docker desktop applicatie gedownload worden.\\
+Hieronder valt ten eerste de opzetting met Docker. Docker is een manier de volledige repository met alle benodigdheden te installeren als een container op de gekozen computer. Dit wordt vooral gebruikt binnen Linux en daarom wordt er ook aangeraden om op een Linux machine te werken. Binnen dit onderzoek is er echter gewerkt met een Windows machine omdat deze parsers op elke machine zouden moeten werken en zo geeft dit onderzoek ook een weergave voor de opzet met Windows. Om Docker te gebruiken op Windows moet eerst de Docker desktop applicatie gedownload worden. Deze implementatie was echter niet eenvoudig en voor dit onderzoek is er na het proberen van Docker desktop gekozen om toch op de conventionele manier te werken vanaf de GitHub repository.\\
 
-In de Docker applicatie is het belangrijk om de stappen van de documentatie te volgen en te starten met de afbeelding (dit is een container die alles bevat van de repository) van logparser te activeren. Hiervoor werd de volgende code binnen docker gebruikt:
-\begin{verbatim}
-    $ mkdir logparser
-    $ docker run --name logparser_py3 -it -v logparser:/logparser logpai/logparser:py3 bash
-    $ git clone https://github.com/logpai/logparser.git /logparser/
-\end{verbatim}
-
-Hierna zou alles klaar moeten zijn om deze repository te gebruiken. De repositories van de andere log parsers zijn overgenomen vanuit GitHub en toegevoegd aan de logpai repository. Dit heeft als resultaat dat binnen deze bachelorproef ook één grote testomgeving aanwezig is en deze zal aanwezig zijn op de GitHub repository \footnote{https://github.com/MarbodNaassens/Bachelorproef\_HOGENT} van deze bachelorproef.
+Na het clonen van de repository zou alles klaar moeten zijn om deze logparser repository te gebruiken. De repositories van de andere log parsers zijn overgenomen vanuit GitHub en toegevoegd aan de logpai repository. Dit heeft als resultaat dat binnen deze bachelorproef ook één grote testomgeving aanwezig is en deze zal aanwezig zijn op de GitHub repository \footnote{https://github.com/MarbodNaassens/Bachelorproef\_HOGENT} van deze bachelorproef.
 
 Om deze repository te gebruiken is het belangrijk om te weten wat de machine specificaties waren binnen dit onderzoek. Deze staan hieronder weergegeven:
 \begin{itemize}
@@ -43,7 +36,12 @@ Om deze repository te gebruiken is het belangrijk om te weten wat de machine spe
     \item RAM: 16GB
     \item Python version: 3.9.5
 \end{itemize}
-Hiernaast zijn er nog python libraries die moeten toegevoegd worden zoals: hashlib, keras, math, pandas, regex, scikit-learn, sys, tensorflow, torch en tqdm.
+
+Omdat er gewerkt wordt met de GitHub repository in plaats van Docker moeten hiernaast nog python libraries toegevoegd worden zoals: hashlib, keras, math, pandas, regex, scikit-learn, sys, tensorflow, torch en tqdm. Deze kunnen allemaal geïmplementeerd worden door:
+\begin{verbatim}
+    pip install <library>
+\end{verbatim}
+Bij het Python verhaal komen ook nog aanpassingen aan de code kijken en deze aanpassingen worden verder toegelicht in sectie \ref{section:testen}.
 
 Bij het onderzoek is wel gebleken dat de parser `SLCT` niet op Windows kan gebruikt worden. Deze werkt namelijk met C code maar zelfs met de juiste GCC compiler, i.e.\ dit is een compiler nodig voor het runnen van C code, geeft deze parser geen resultaten. Voor deze parser te testen is er gewerkt geweest met een virtuele machine met de volgende specificaties:
 \begin{itemize}
@@ -51,15 +49,34 @@ Bij het onderzoek is wel gebleken dat de parser `SLCT` niet op Windows kan gebru
     \item RAM: 4GB
 \end{itemize}
 
-Voor deze opzet werd Oracle VirtualBox \footnote{https://www.virtualbox.org/} gebruikt tesamen met een Fedora iso afbeelding, i.e.\ een container die wordt gebruikt om virtueel fedora te kunnen gebruiken. Hiernaast werd de hierboven vermelde opzetting van de logpai repository toegepast.\\
+Voor deze opzet werd Oracle VirtualBox \footnote{https://www.virtualbox.org/} gebruikt tesamen met een Fedora iso afbeelding \footnote{De x86\_64 iso op https://getfedora.org/en/workstation/download/}, i.e.\ een container die wordt gebruikt om virtueel fedora te kunnen gebruiken. Deze versie van fedora bezit reeds een GCC compiler om SLCT te kunnen runnen. Hiernaast werd de hierboven vermelde opzetting van de logpai repository toegepast. Python 3 moest natuurlijk wel nog geïnstalleerd worden tesamen met de benodigde libraries. Voor de installatie van Python 3.8.7 op Linux werd de volgende code gebruikt:
+\begin{verbatim}
+    sudo yum install gcc openssl-devel bzip2-devel libffi-devel
+    cd /opt
+    wget https://www.python.org/ftp/python/3.8.7/Python-3.8.7.tgz
+    tar xzf Python-3.8.7.tgz
+    cd Python-3.8.7
+    sudo ./configure --enable-optimizations
+    sudo make altinstall
+    sudo rm Python-3.8.7.tgz
+    python3.8 -V
+\end{verbatim}
+
+Hiernaast moesten ook nog dezelfde aanpassingen aan de python code gebeuren zoals verder zal uitegelgd worden in sectie \ref{section:testen}. Deze aanpassingen moesten hierbij uitgevoerd door het volgend commando te runnen:
+\begin{verbatim}
+    gedit /logparser/logparser/<folder>/<file>
+\end{verbatim}
+
+Dit was nodig omdat de gedownloadde files onder `read-only` access stonden. Om dit commando uit te voeren moet er wel als de root user aangemeld worden.
+
 
 De opbouw van dit onderzoek zal te vinden zijn in de repository van deze bachelorproef onder de map `BP\_onderzoek`. Deze map bevat verschillende files en folders. Hieronder zal een toelichting gegeven worden over de inhoud van deze folders:
 \begin{itemize}
-    \item LogParse: Deze folder bevat het onderzoek in verband met LogParse. Hierin zal de implementatie van de gekozen parsers aanwezig zijn voor het testen van een online omgeving.\\
+    \item LogParse: Deze folder bevat het onderzoek in verband met LogParse. Hierin zal de implementatie van de gekozen parsers aanwezig zijn voor het testen van een online omgeving. Om deze code te kunnen laten lopen moet er vanuit deze folder gewerkt worden. Verdere implementatie wordt besproken in de sectie \ref{subsection:OnlineOffline}.\\
     
     \item Parsers: Deze folder zal in het onderzoek alle implementaties van de logparsers bevatten. Deze implementaties zijn geschreven in Python omdat dit de taal is die gekozen is door de vorige paper en algemeen bekend staat als een goede taal voor data verwerking. Ook zal het makkelijker zijn om de parser `NuLog` te implementeren via Python omdat deze reeds een library bevat voor het werken met Neurale Netwerken en NLP.\\
     
-    \item Service: Deze folder zal in het onderzoek alle test bestanden bevatten die gebruikt worden om de log bestanden door de parser te laten verwerken en om vergelijkende waarden terug te krijgen. Ook zal men de resultaten van vorige onderzoeken hierin terugvinden. Om de test bestanden te laten lopen zal er moeten gewerkt worden in de command line vanaf deze folder. Bijvoorbeeld zo zal voor Drain het volgend commando uitgevoerd moeten worden:
+    \item Service: Deze folder zal in het onderzoek alle test bestanden bevatten die gebruikt worden om de log bestanden door de parser te laten verwerken en om vergelijkende waarden terug te krijgen. Ook zullen de resultaten van vorige onderzoeken hierin teruggevonden worden. Om de test bestanden te laten lopen zal er moeten gewerkt worden in de command line vanaf deze folder. Bijvoorbeeld zo zal voor Drain het volgend commando uitgevoerd moeten worden:
     
     \begin{verbatim}
         python3 ./Drain_benchmark.py
@@ -91,13 +108,34 @@ Het is niet eenvoudig om log parsers te vergelijken omdat hun werking zeer versc
 \end{itemize}
 
 \section{Testen van benchmarks}
+\label{section:testen}
 Bij het testen van de verschillende parsers wordt er gebruik gemaakt van de verschillende vergelijkingscriteria. Deze criteria zijn het makkelijkst op te lijsten in een tabel zodat er een mooi overzicht is voor de vergelijking van deze parsers en dit zal weergegeven worden in de laatste sectie van deze sectie waarbij alle parsers, de reeds onderzochte en de nieuwe, zullen opgelijst worden.\\
 
-De parsers die zich in de reeds vernoemde paper bevinden waren makkelijk te testen omdat de code hiervoor reeds geoptimaliseerd was. Er moesten echter wel een paar aanpassingen gebeuren omdat dit onderzoek werd uitgevoerd met een oudere versie van Python. Het is aan te raden om altijd mee te zijn met de nieuwste versie van de technologie dus werd dit onderzoek uitgevoerd met Python 3.9.5. De versie van de vorige paper was Python 2.7 dit betekende dat er aanpassingen moesten gebeuren aan imports en er methodes moesten aangepast worden omdat ze `deprecated`, i.e.\ niet meer gesupporteerd, waren.\\
+De parsers die zich in de reeds vernoemde paper bevinden waren makkelijk te testen omdat de code hiervoor reeds geoptimaliseerd was. Er moesten echter wel een paar aanpassingen gebeuren omdat dit onderzoek werd uitgevoerd met een oudere versie van Python. Het is aan te raden om altijd mee te zijn met de nieuwste versie van de technologie dus werd dit onderzoek uitgevoerd met Python 3.9.5. De versie van de vorige paper was Python 2.7 dit betekende dat er aanpassingen moesten gebeuren aan imports en er methodes moesten aangepast worden omdat ze `deprecated`, i.e.\ niet meer gesupporteerd, waren. De aanpassingen worden hieronder weergegeven:
+\begin{itemize}
+    \item Regex: In de verschillende parser files wordt er gebruik gemaakt van $re$ voor reguliere expressies te verwerken en dit wordt geïmporteerd aan de hand van de code: 
+    \begin{verbatim}
+        import re
+    \end{verbatim}
+    Dit werkt echter niet meer in Python 3 dus dit moet aangepast worden naar:
+    \begin{verbatim}
+        import regex as re
+    \end{verbatim}
+
+    \item Scipy: Gelijkaardig aan het vorige punt is `scipy.misc` niet meer een geldige import en moet deze import in evaluator.py (binnen de utils folder), utils.py (binnen de scikit-extremes/sk-extremes folder) en wind.py (binnen de scikit-extremes/sk-extremes/models folder) aangepast worden naar het volgende:
+    \begin{verbatim}
+        from scipy.special import *
+    \end{verbatim}
+
+    \item Dictionary iteratie: Om over dictionaries te itereren werd in Python 2.7 $.iteritems$ gebruikt maar binnen Python 3 is dit vervangen door $.items$. Dit moest aangepast worden in alle benchmark bestanden. Hiernaast moest dit aangepast worden in de volgende bestanden: MoLFI.py, LogSig.py, regexmatch.py, RI\_precision.py (binnen de LogParse folder), logTIM.py (binnen de LogParse folder), classifier.py (binnen de LogParse folder), checkVocab.py (binnen de LogParse folder).\\
+    
+    \item Folders: Naast deze aanpassingen werd binnen deze bachelorproef een eigen folder structuur opgesteld en hiervoor moesten bepaalde imports aangepast worden. Zo moesten in de $\_\_init\_\_.py$ bestanden van de parsers de imports aangepast worden door een punt voor de naam van de parser te zetten, bijvoorbeeld:
+    \begin{verbatim}
+        from .Drain import *
+    \end{verbatim}
+\end{itemize}
 
 Naast het aanpassen van de code door de verandering naar de nieuwste Python versie is testen geen probleem. Een uitzondering hierop is de parser SLCT omdat deze parser deels in C is geschreven. Om de C code te kunnen runnen moet er gezorgd worden dat er een versie van GCC beschikbaar was op de computer en zelfs na de installatie werkt deze parser niet naar behoren op een Windows machine. Om dit op te lossen wordt aangeraden om Linux te gebruiken zoals reeds vermeld in de vorige sectie \ref{section:Technologie}\\
-
-Om deze parsers te testen op nieuwe datasets werden een dataset genomen van Exitas, genaamd Orval. De invloed van deze nieuwe datasets op de criteria van de parsers kunnen waargenomen worden binnen de laatste sectie van dit hoofdstuk.
 
 \section{Toevoegen en testen van nieuwe parsers}
 Voor het toevoegen van de nieuwe parsers aan deze reeds bestaande tool moesten er meer aanpassingen gebeuren dan enkel het versiebeheer. Hieronder zal er een duidelijke weergave gegeven worden van de verschillende extra log parsers en hun inwerking in de benchmarking tool:
@@ -106,9 +144,9 @@ Voor het toevoegen van de nieuwe parsers aan deze reeds bestaande tool moesten e
     
     Een ander duidelijk verschil is dat er van deze parser reeds verschillende versies beschikbaar waren, i.e.\ een online en offline versie. Hierbij werd binnen dit onderzoek naar de online versie gekeken omdat deze het interessantst is voor dit onderzoek.\\
     
-    De folder structuur van de repository is behouden zodat de code geen problemen zou geven en daarom wordt deze parser onder de folder `service` weergegeven. Bij het testen van deze parser moeten er twee bestanden uitgevoerd worden, enerzijds het bestand $Main.py$ binnen de folder `LogAbstractionOL` en anderzijds het bestand $Main.py$ binnen de folder `Evaluation`. In deze laatste folder worden per dataset de bijhorende parameters weergegeven voor de thresholds die automatisch berekend zijn voor de 2-grams en 3-grams respectievelijk.\\
+    De folder structuur van de repository is behouden zodat de code geen problemen zou geven en daarom wordt deze parser onder de folder `parsers` uitgevoerd. Bij het testen van deze parser moeten er twee bestanden uitgevoerd worden, enerzijds het bestand $Main.py$ binnen de folder `LogAbstractionOL` en anderzijds het bestand $Main.py$ binnen de folder `Evaluation`. In deze laatste folder worden per dataset de bijhorende parameters weergegeven voor de thresholds die automatisch berekend zijn voor de 2-grams en 3-grams respectievelijk.\\
     
-    \item NuLog: NuLog was makkelijker in te werken in de tool omdat de code gebaseerd was op de tool en dezelfde benchmarks gebruikte. Hierbij moesten er eerst en vooral aanpassingen gebeuren voor de werking met Python 3.8 en voor de implementatie van neurale netwerken. Na deze aanpassingen was de parser makkelijk te testen maar het testen van deze parser nam wel veel tijd in beslag. Bij het uitvoeren van deze parser wordt steeds een nieuw model opgesteld voor elke dataset waardoor dit veel vermogen vraagt van een CPU en aldus een substantieel aantal tijd in neemt. Hierbij moet ook vermeld worden dat nog niet elke dataset ingewerkt was binnen NuLog dit betekende dat binnen dit onderzoek deze overige zelf ingewerkt moeten worden
+    \item NuLog: NuLog was makkelijker in te werken in de tool omdat de code gebaseerd was op de tool en dezelfde benchmarks gebruikte. Hierbij moesten er eerst en vooral aanpassingen gebeuren voor de werking met Python 3.9 en voor de implementatie van neurale netwerken (zoals het installeren van scikit learn). Na deze aanpassingen was de parser makkelijk te testen maar het testen van deze parser nam wel veel tijd in beslag. Bij het uitvoeren van deze parser wordt steeds een nieuw model opgesteld voor elke dataset waardoor dit veel vermogen vraagt van een CPU en aldus een substantieel aantal tijd in neemt. Hierbij moet ook vermeld worden dat nog niet elke dataset ingewerkt was binnen NuLog dit betekende dat binnen dit onderzoek deze overige zelf ingewerkt moeten worden
     
     \item LogParse: LogParse heeft het voordeel dat het reeds getest was met dezelfde parsers en log bestanden als in de paper `Tools and Benchmarks for Automated Log Parsing` \autocite{TBA2019}. Hierbij was de moeilijkheidsgraad eerder het structureren en vinden van de juiste files om deze samen te voegen omdat op de Github repository \footnote{https://github.com/NetManAIOps/LogParse} de parser files niet altijd bij elkaar staan. Buiten dit structureren zal het inwerken van eventuele nieuwe parsers problematisch kunnen zijn door de structuur.
 \end{itemize}
@@ -121,7 +159,9 @@ Het Offline vs Online principe wordt toegelicht in de laatste sectie \ref{subsec
 \subsection{Vergelijkingstabellen}
 De vergelijkende tabellen die hieronder weergegeven worden zijn tabellen die de prestaties van de parsers weergeven op de fractionele datasets, i.e.\ de datasets die beperkt zijn tot de eerste 2000 lijnen van een log file.
 
-Deze tabellen op zich zeggen al redelijk veel over de performantie van de parsers. In de tabellen zijn de grootste waarden van elke kolom vet gedrukt. Dit geeft een makkelijker overzicht over de waarden. Bij het aantal clusters wordt de waarde die het dichtst bij de verwachte waarde ligt vet gedrukt. Hiernaast worden ook in de parser kolom de drie beste parsers vet gedrukt om zo een overzicht te houden voor het latere onderzoek waar we eventuele offline parsers online kunnen laten opereren.\\
+Deze tabellen op zich zeggen al redelijk veel over de performantie van de parsers. In de tabellen zijn de grootste waarden van elke kolom vet gedrukt. Dit geeft een makkelijker overzicht over de waarden. Bij het aantal clusters wordt de waarde die het dichtst bij de verwachte waarde ligt vet gedrukt. Hiernaast worden ook in de parser kolom de drie beste parsers vet gedrukt om zo een overzicht te houden voor het latere onderzoek waar we eventuele offline parsers online kunnen laten opereren. Deze parsers zullen worden gekozen door eerst en vooral te kijken naar de accuraatheid, hiernaast naar de tijd en de f-score en uiteindelijk naar het aantal clusters. Hierdoor kunnen sommige parsers die niet de hoogste waarde binnen een bepaalde kolom bezitten ook gekozen worden als ze de tweede hoogste waarde bezitten.\\
+
+Er wordt vooral naar de accuraatheid en snelheid gekeken omdat deze twee de belangrijkste waarden zijn voor het antwoord op deze bachelorproef. Een parser die snel werkt maar niet accuraat is of een parser die traag werkt maar een goede accuraatheid levert, is niet interessant.
 
 Wat ook belangrijk is om te weten is dat sommige waarden als niet aanwezig (N/A) worden geschouwd. Deze waarden zullen hieronder toegelicht worden:
 \begin{itemize}
@@ -213,7 +253,7 @@ In deze tabellen wordt een vergelijkingscriterium niet vermeld en dat is het `Ma
             
             Logram & 0.20s & 0.6377 & 0.3125 & 16 \\
             
-            NuLog & N/A & \textbf{1.0000} & 1.0000 & \textbf{6} \\
+            NuLog & N/A & \textbf{1.0000} & \textbf{1.0000} & \textbf{6} \\
             \hline
         \end{tabular}
     \end{center}
@@ -818,27 +858,35 @@ Het is wel belangrijk om te onthouden dat een manuele check altijd subjectief za
 Deze sectie zal beginnen met een algemene observatie en dan onderverdeeld zijn per parser. Hierbij zullen in de verschillende subsecties de parsers toegelicht worden op hun algemene resultaten en niet apart per log bestand omdat het belangrijk is voor een parser om goede resultaten te behalen losstaand van het log bestand.
 
 \subsubsection{Algemene observatie}
-Als de tabellen bekeken worden staan er verschillende log parsers aangeduid na het onderzoek als een mogelijke oplossing voor de onderzoeksvraag. Deze zijn echter verdeeld per dataset en als men dan het algemeen overzicht gaat bekijken zien we dat de meest gekozen parsers Drain en NuLog zijn. Deze komen bij de gekozen parsers respectievelijk 10 en 6 keer voor.\\
+Als de tabellen bekeken worden staan er verschillende log parsers aangeduid na het onderzoek als een mogelijke oplossing voor de onderzoeksvraag. Deze zijn echter verdeeld per dataset en als er dan gekeken wordt naar het algemeen overzicht is het duidelijk dat de meest gekozen parsers Drain en NuLog zijn. Deze komen bij de gekozen parsers respectievelijk 10 en 6 keer voor.\\
 
 Hiernaast zijn er nog veel parsers met een score van 5 zoals AEL, IPLoM en Spell. Als de individuele scores van deze parsers op de datasets bekeken wordt dan komt Spell naar boven als de meest consistente. Zo valt de accuraatheid van AEL soms tegen en kan IPLoM niet om met de Mac dataset (zie tabel \ref{table:Mac}).\\
 
-Uit deze observatie blijkt dus dat de top drie van de parsers op basis van dit onderzoek bestaat uit Drain, NuLog en Spell.
+Uit deze observatie blijkt dus dat de top drie van de parsers op basis van dit onderzoek bestaat uit Drain, NuLog en Spell. Om deze observatie verder te ondersteunen is er binnen dit onderzoek een grafiek opgesteld met de resultaten met betrekking tot accuraatheid van de verschillende parsers op de verschillende datasets. Op figuur \ref{pic:testgrafiek} kan waargenomen worden dat er een paar veelbelovende uitschieters zijn zoals AEL, LenMa, Spell, Drain en NuLog.
+
+\begin{figure}[!htp]
+    \includegraphics[width=\linewidth]{bp_test_grafiek.png}
+    \caption{Weergave van alle parsers in een gestapelde diagram. In de legende worden de kleuren van de verschillende datasets weergegeven.}
+    \label{pic:testgrafiek}
+\end{figure}
 
 \subsubsection{SLCT}
 Bij SLCT is het opmerkelijk dat deze parser vooral aan overfitting doet. Deze parser heeft altijd een zeer laag aantal templates als uitkomst. Bij een inspectie van de templates wordt al snel duidelijk waarom. Deze parser maakt snel gebruik van parameter symbolen waardoor er templates zijn die volledig uit parameters bestaan en op deze manier zijn er honderden lijnen aan gelinkt.\\
 
-Een goed voorbeeld hiervan is de Linux (zie tabel \ref{table:Linux}) dataset. Hierbij zien we dat het aantal gewenste clusters gelijk is aan 118, maar SLCT vindt er zogezegd maar 13.
+Een goed voorbeeld hiervan is de Linux (zie tabel \ref{table:Linux}) dataset. Hierbij kan er gezien worden dat het aantal gewenste clusters gelijk is aan 118, maar SLCT vindt er maar 13.
 
 \subsubsection{AEL}
-Deze parser geeft in het algemeen een goed resultaat en werkt op een snel tempo. Op basis van snelheid staat deze parser bijna altijd in de top 3. Bij het bekijken van de accuraatheid vinden we echter dat deze parser geen consistente resultaten levert. Zo liggen een deel van de resultaten dichtbij 90 procent maar een even groot deel rond 50 procent.\\
+Deze parser geeft in het algemeen een goed resultaat en werkt op een snel tempo. Op basis van snelheid staat deze parser bijna altijd in de top 3. Bij het bekijken van de accuraatheid wordt het echter duidelijk dat deze parser geen consistente resultaten levert. Zo liggen een deel van de resultaten dichtbij 90 procent maar een even groot deel rond 50 procent. Daardoor geeft figuur \ref{pic:testgrafiek} een vertekend beeld.\\
 
 Deze parser is niet aan te raden omdat deze te onstabiel is tegenover de datasets. Het haalt geen slechte resultaten maar er zijn genoeg andere parsers die beter scoren.
 
 \subsubsection{IPLoM}
-Deze parser haalt op veel data sets goeie scores maar bij het onderzoek is gebleken dat deze problemen geeft bij de data set Mac (zie tabel \ref{table:Mac}). De parser loopt vast bij deze dataset ookal zijn dit maar 2000 lijnen. Op de computer gebruikt binnen dit onderzoek kon deze parser niet overweg met deze dataset en dat is reeds een slecht teken wanneer er gezocht wordt naar een parser die met meerdere datasets overweg kan.
+Deze parser haalt op veel data sets goeie scores maar bij het onderzoek is gebleken dat deze problemen geeft bij de data set Mac (zie tabel \ref{table:Mac}). De parser loopt vast bij deze dataset ookal zijn dit maar 2000 lijnen. Op de computer gebruikt binnen dit onderzoek kon deze parser niet overweg met deze dataset en dat is reeds een slecht teken wanneer er gezocht wordt naar een parser die met meerdere datasets overweg kan.\\
+
+De resultaten van de andere datasets zijn wel naarbehoren en het is duidelijk dat bij deze datasets de parser goed generaliseert als er gekeken wordt naar de gevonden clusters. Deze gevonden clusters liggen dichtbij het verwachtte resultaat.
 
 \subsubsection{LKE}
-Deze parser behaalt geen goede resultaten op vlak van accuraatheid en op vlak van snelheid duurt de parsing meestal langer dan 1 minuut. De snelheid is essentieel binnen dit onderzoek dus een parser die langer dan 1 minuut nodig heeft zal niet tot de conclusie behoren.
+Deze parser behaalt geen goede resultaten op vlak van accuraatheid en op vlak van snelheid duurt de parsing meestal langer dan 1 minuut. De snelheid is essentieel binnen dit onderzoek dus een parser die langer dan 1 minuut nodig heeft zal niet tot de conclusie behoren. Neem bijvooerbeeld de scores behaalt op de dataset Hadoop \ref{table:Hadoop}. Hierbij kan waargenomen worden dat de tijd langer is dan 1 minuut en het resultaat is een accuraatheid van 0. Als er dan gekeken wordt naar de gevonden templates dan is het duidelijk dat deze parser problemen had met deze dataset omdat het resultaat maar één cluster bevat dat bestaat uit één enkele parameter.
 
 \subsubsection{LFA} 
 Deze parser heeft bij geen enkele dataset een positieve accuraatheid behaalt. De reden wordt duidelijk na een inspectie van de cluster resultaten. Deze bestaan soms uit 1 cluster met niets in of deze zijn zeer specifiek, i.e.\ de cluster lijn is bijna exact hetzelfde als de loglijn. Dit is duidelijk een vorm van underfitting. De parser kan niet goed generaliseren dus zal deze ook niet verder benuttigd worden.
@@ -847,13 +895,15 @@ Deze parser heeft bij geen enkele dataset een positieve accuraatheid behaalt. De
 LogSig behaalt geen goede resultaten op de vergelijkingscriteria. De snelheid is langer dan één seconde, de accuraatheid gaat soms onder 10 procent en de gevonden clusters zijn zeer specifiek. Zo blijven sommige parameternamen perfect behouden en ontstaat er zo een hoop aan gelijkaardige clusters.
 
 \subsubsection{SHISO}
-Deze logparser behaalt kleine accuraatheid scores op datasets die veel clusters bevatten. Deze kan duidelijk niet goed generaliseren bij teveel verschillende loglijnen.
+Deze logparser behaalt kleine accuraatheid scores op datasets die veel clusters bevatten. Deze kan duidelijk niet goed generaliseren bij teveel verschillende loglijnen. Zo kan bij het analyseren van de uitkomst voor de Android dataset (zie tabel \ref{table:Android}) gezien worden dat de gevonden clusters nog veel bestandslocaties bevatten die eigenlijk als parameter moeten beschouwd worden.
 
 \subsubsection{LogCluster}
-Deze parser had het nadeel dat zelfs met aanpassingen deze niet het aantal clusters wou weergeven die gevonden waren. Hierdoor was dit een moeilijk vergelijkingspunt maar dit hield het onderzoek niet tegen omdat de lage accuratie cijfers reeds genoeg weergeven over de parser en duidelijk maken dat deze niet geschikt is.
+Deze parser had het nadeel dat zelfs met aanpassingen deze niet het aantal clusters wou weergeven die gevonden waren. Hierdoor was dit een moeilijk vergelijkingspunt maar dit hield het onderzoek niet tegen omdat de lage accuratie cijfers reeds genoeg weergeven over de parser en duidelijk maken dat deze niet geschikt is. Als er gekeken wordt naar de resultaten wordt duidelijk waarom deze cijfers zo laag zijn. Veel parameters zoals IP-adressen en poortnummers blijven behouden in de parsing.
 
 \subsubsection{LenMa}
-Deze parser behaalt algemeen goeie scores maar geeft bij enkele datasets zoals de Windows dataset (zie tabel \ref{table:Windows}) clusters terug die te specifiek zijn. Dit komt vooral voor bij de langere lijnen.
+Deze parser behaalt algemeen goeie scores maar geeft bij enkele datasets zoals de Windows dataset (zie tabel \ref{table:Windows}) clusters terug die te specifiek zijn. Dit komt vooral voor bij de langere lijnen. Daardoor komt deze meestal meer clusters uit dan in het resultaat verwacht wordt.\\
+
+Op basis van figuur \ref{pic:testgrafiek} en de resultaten van de parsing lijkt dit een goede parser maar door de lange verwerkings tijden die groter dan één seconde kunnen worden is dit geen parser voor real-time verwerking.
 
 \subsubsection{LogMine}
 LogMine geeft meestal wel een goede accuraatheid maar als er gekeken wordt naar de clusters is het duidelijk dat deze zeer generiek kunnen zijn en dus dat de parser aan het overfitten is zoals bij het resultaat van de Android dataset (zie tabel \ref{table:Android}) of dat deze juist zeer specifiek zijn zoals bij het resultaat van de Hadoop dataset (zie tabel \ref{table:Hadoop}).\\
@@ -861,26 +911,30 @@ LogMine geeft meestal wel een goede accuraatheid maar als er gekeken wordt naar 
 Er zit dus wel een duidelijke fluctatie in de resultaten van deze data set. Hier boven op heeft deze parser ook een zeer lange parsing tijd die meestal boven één seconde gaat.
 
 \subsubsection{Spell}
-Spell levert over de verschillende datasets een zeer goed resultaat. Deze parser evenaart bijna Drain in de resultaten. Meestal haalt deze een lagere accuraatheid maar het verschil is zeer klein. Bij het analyseren van de log clusters zien we dat deze parser meestal goed generaliseert.\\
+Spell levert over de verschillende datasets een zeer goed resultaat. Deze parser evenaart bijna Drain in de resultaten. Meestal haalt deze een lagere accuraatheid maar het verschil is zeer klein. Bij het analyseren van de log clusters is het duidelijk dat deze parser meestal goed generaliseert.\\
 
-Er zijn uitzonderingen en zo zien we dat bij de Zookeeper dataset (zie tabel \ref{table:Zookeeper}) er veel bestand locaties behouden worden in plaats van deze om te zetten naar parameters maar dit zijn dingen die bij andere parsers ook gebeuren en bij deze parser is dit uitzonderlijk.\\
+Er zijn uitzonderingen en als er gekeken wordt naar de Zookeeper dataset (zie tabel \ref{table:Zookeeper}), is het duidelijk dat er veel bestand locaties behouden worden in plaats van deze om te zetten naar parameters maar dit zijn dingen die bij andere parsers ook gebeuren en bij deze parser is dit uitzonderlijk.\\
 
 Omdat deze parser een goed resultaat levert en in totaal vijf keer gemarkeerd staat in de tabellen zal deze verder getest worden door deze te implementeren in LogParse.
 
 \subsubsection{Drain}
-Drain was de parser die binnen het vorig onderzoek naar boven kwam als de meest performante parser. Binnen dit onderzoek hebben we het vorig onderzoek nagebootst maar met aanpassingen dus was het interessant om te zien hoe Drain hieruit ging komen.\\
+Drain was de parser die binnen het vorig onderzoek naar boven kwam als de meest performante parser. Binnen dit onderzoek werd het vorig onderzoek nagebootst maar met aanpassingen dus was het interessant om te zien hoe Drain hieruit ging komen.\\
 
-Binnen dit onderzoek zien we duidelijk dat Drain nog altijd zeer performant en vooruitstrevend is. Zo kan men zien dat deze parser 10 keer voorkwam tussen de drie beste parsers van een dataset. Dit is veel meer dan elke andere parser dus deze parser zal meegenomen worden naar verder onderzoek met LogParse.
+Binnen dit onderzoek wordt het duidelijk dat Drain nog altijd zeer performant en vooruitstrevend is. Zo kan er uit de tabellen afgeleid worden dat deze parser 10 keer voorkwam tussen de drie beste parsers van een dataset. Dit is veel meer dan elke andere parser dus deze parser zal meegenomen worden naar verder onderzoek met LogParse.\\
+
+De parsings gevonden door Drain zijn meestal gelijkaardig aan de verwachtte parsings en zo behoudt deze parsers een consistente accuraatheid. Als de parsings verder geanaliseerd worden komen hier goede en duidelijke clusters uit. Een uitzondering hierop zijn echter de HealthApp (zie tabel \ref{table:HealthApp}) en OpenStack datasets (zie tabel \ref{table:OpenStack}). Hierbij blijven veel clusters over die hun parameters behouden maar dit is een uitzondering tussen de datasets en hierbij wordt nog een accuraatheid van meer dan 0.7 behouden.
 
 \subsubsection{MoLFI}
-Deze parser geeft goede resultaten op papier maar als er gekeken wordt naar de behaalde loglijnen blijkt dat deze parser niet altijd even goede resultaten behaalt. Als het resultaat van de Mac (zie tabel \ref{table:Mac}) of Spark dataset (zie tabel \ref{table:Spark}) bekeken wordt is het duidelijk dat hier geen goede generalisatie plaatsvond en dat dit geresulteerd is in dubbel zoveel patronen als men zou verwachten. Dit is ook zichtbaar bij OpenStack maar dit kan goedgepraat worden door het feit dat andere parsers hierbij ook underfitten.\\
+Deze parser geeft goede resultaten op papier maar als er gekeken wordt naar de behaalde loglijnen blijkt dat deze parser niet altijd even goede resultaten behaalt. Als het resultaat van de Mac (zie tabel \ref{table:Mac}) of Spark dataset (zie tabel \ref{table:Spark}) bekeken wordt is het duidelijk dat hier geen goede generalisatie plaatsvond en dat dit geresulteerd is in dubbel zoveel patronen dan er verwacht werd. Dit is ook zichtbaar bij OpenStack (zie tabel \ref{table:OpenStack}) maar dit kan goedgepraat worden door het feit dat andere parsers hierbij ook underfitten.\\
 
 Hier boven op heeft deze parser ook veel tijd nodig om de parsing uit te voeren zo worden er soms tijden boven 60 seconden waargenomen.
 
 \subsubsection{Logram}
-Deze parser werd toegevoegd aan het rooster binnen dit onderzoek en behaalde op vlak van parsing tijd zeer hoge resultaten. Zo kan men zien aan de hand van de tabellen dat deze parser bijna altijd bovenaan staat bij het criterium `Tijd`.\\
+Deze parser werd toegevoegd aan het rooster binnen dit onderzoek en behaalde op vlak van parsing tijd zeer hoge resultaten. Zo kan er afgeleid worden aan de hand van de tabellen dat deze parser bijna altijd bovenaan staat bij het criterium `Tijd`.\\
 
-De resultaten bij F-Score en Accuraatheid vallen echter tegen. Hierbij haalt de parser meestal slechtere scores dan de oudere parsers en het is duidelijk dat deze eerst nog verder onderzocht moet worden voordat deze een goede parsing voor online streaming zou geven.
+De resultaten bij F-Score en Accuraatheid vallen echter tegen. Hierbij haalt de parser meestal slechtere scores dan de oudere parsers en het is duidelijk dat deze eerst nog verder onderzocht moet worden voordat deze een goede parsing voor online streaming zou geven.\\
+
+De gevonden parsings zijn bij de ene helft van de datsets zeer goed en zeer generiek maar bij andere datasets zoals bijvoorbeeld de Apache dataset (zie tabel \ref{table:Apache}) blijven er zeer specifieke clusters over.
 
 \subsubsection{NuLog}
 Deze parser werd toegevoegd aan het rooster binnen dit onderzoek en kwam meestal zeer goede resultaten uit. Deze zeer goede resultaten werden meestal behaald door het perfectioneren van de parameters zoals epochs en de grootte van het deel per epoch.\\
@@ -897,7 +951,7 @@ De gekozen logparsers zijn reeds online methodes maar dankzij LogParse kan dit o
 
 De werking met LogParse is wel niet heel eenvoudig en het is moeilijk om nieuwe parsers in te werken omdat hier veel componenten aan vast hangen. LogParse heeft reeds enkele implementatie vrijgegeven in de GitHub repository en hierdoor waren Spell en Drain reeds makkelijk te integreren.\\
 
-Om de werking met LogParse te onderzoeken is er binnen dit onderzoek gekozen om te werken met een trainingsset van 30 procent. Dit betekent dat 70 procent van het log bestand achteraf zal geparsed worden. Om deze configuratie te laten lopen moet men binnen LogParse de volgende commando's uitvoeren:
+Om de werking met LogParse te onderzoeken is er binnen dit onderzoek gekozen om te werken met een trainingsset van 30 procent. Dit betekent dat 70 procent van het log bestand achteraf zal geparsed worden. Om deze configuratie te laten lopen moet er binnen LogParse de volgende commando's uitgevoerd worden:
 \begin{verbatim}
     python3 ./splitLog.py -dataset 2kBGL -ratio 0.3 -reprocess True
     python3 ./evaluateLogParse.py -dataset 2kBGL -algorithm Drain
@@ -908,9 +962,9 @@ Merk hierbij op dat de ratio variabele de grootte van de trainingsset weergeeft.
     python3 ./logTIM.py Drain 2kBGL 0.3 1
 \end{verbatim}
 
-Hierdoor zal een evaluatie van de log parser gemaakt worden. In de tabel hieronder wordt een weergave gegeven van de evaluatie met LogParse in vergelijking met de offline manier. Hierbij kijken we enkel naar de tijd, f-score en het aantal gevonden clusters.
+Hierdoor zal een evaluatie van de log parser gemaakt worden. In de tabel hieronder wordt een weergave gegeven van de evaluatie met LogParse in vergelijking met de offline manier. Hierbij wordt enkel gekeken naar de tijd, f-score en het aantal gevonden clusters.
 
-In tabel \ref{table:onlinetabel} zien we dat de parsers duidelijk minder goede resultaten behalen. Accuraatheid is moeilijk te vergelijken omdat dit niet in de LogParse code ingewerkt kon worden maar dankzij de f-score en het aantal clusters kan er reeds een duidelijk verschil waargenomen worden.
+In tabel \ref{table:onlinetabel} wordt weergegeven dat de parsers duidelijk minder goede resultaten behalen. Accuraatheid is moeilijk te vergelijken omdat dit niet in de LogParse code ingewerkt kon worden maar dankzij de f-score en het aantal clusters kan er reeds een duidelijk verschil waargenomen worden.
 
 \begin{table}[!htp]
     \caption{Tabel met vergelijking van offline vs online behaalde scores van de gekozen log parsers met toepassing op de fractionele data set BGL.}
@@ -950,7 +1004,7 @@ Hierbij is er begonnen met de dataset verkregen via de co-promotor van deze bach
     LGWR slave LG00 created with pid=29, OS pid=39235
     Starting background process SMON
 \end{verbatim}
-Hieruit is een patroon af te leiden dat begint met de datum, dan het uur en uiteindelijk op een nieuwe lijn het event. Dit patroon was moeilijk in te werken binnen dit onderzoek omdat deze parsers lijn per lijn lopen. Als gevolg gaven de parsers voor deze dataset geen goede resultaten terug. De tijd die het de parsers nam om deze dataset te verwerken was bij Drain wel veelbelovend. Zo duurde het maar 15.8 seconden voor Drain om deze dataset van 50000 lijnen te parsen. Bij Spell duurde dit maar liefst 78.2 seconden en bij NuLog was dit onmogelijk weer te geven omdat de opzet van het model te lang duurde.\\
+Hieruit is een patroon af te leiden dat begint met de datum, dan het uur en uiteindelijk op een nieuwe lijn het event. Dit patroon was moeilijk in te werken binnen dit onderzoek omdat deze parsers lijn per lijn lopen. Als gevolg gaven de parsers voor deze dataset geen goede resultaten terug. De tijd die het de parsers nam om deze dataset te verwerken was bij Drain wel veelbelovend. Zo duurde het maar 15.8 seconden voor Drain om deze dataset van 50000 lijnen te parsen met een gemiddelde van 0.41 seconden op 2000 lijnen is dit een zo goed als lineaire ontwikkeling. Bij Spell duurde dit maar liefst 78.2 seconden en bij NuLog was dit onmogelijk weer te geven omdat de opzet van het model te lang duurde.\\
 
 Om toch een beter overzicht te krijgen over de invloed van een nieuwe dataset op deze parsers is er een tweede dataset gekozen die online verkrijgbaar was op Kaggle.com \footnote{https://www.kaggle.com/shawon10/web-log-dataset}. Deze dataset heet de web log dataset en geeft enkele loglijnen die verschillende http aanvragen bevat. Hieronder worden enkele lijnen van deze dataset weergegeven:
 \begin{verbatim}
@@ -974,7 +1028,7 @@ Drain heeft deze logfile van 16000 lijnen verwerkt in 2.22 seconden en gaf hierb
     cfadd2fa,POST <*> HTTP/1.0,3
 \end{verbatim}
 
-NuLog duurde langer om te runnen door het opstellen van het model maar gaf als uitkomst clusters die door elkaar lopen. Om alle clusters te achterhalen zou deze parser uitgebreid moeten worden met een cluster weergave zoals de andere parsers. Uit de logs zelf kunnen we echter constateren dat de parser nog zeer specifiek bleef en veel parameters zoals css bestandslocaties heeft overgelaten. Hieronder wordt en deel van ede uitkomst van NuLog weergegeven:
+NuLog duurde langer om te runnen door het opstellen van het model maar gaf als uitkomst clusters die door elkaar lopen. Om alle clusters te achterhalen zou deze parser uitgebreid moeten worden met een cluster weergave zoals de andere parsers. Uit de logs zelf kan echter geconstateerd worden dat de parser nog zeer specifiek blijft en veel parameters zoals css bestandslocaties heeft overgelaten. Hieronder wordt en deel van ede uitkomst van NuLog weergegeven:
 \begin{verbatim}
     ac6cccffea9df8ef06deb8200bbaba5b,GET /css/bootstrap.min.css <*>
     4264885f9e74401dafa7b41a326deb37,GET /css/font-awesome.min.css <*>
